@@ -1,0 +1,1 @@
+openapi-generator generate -i "oas.yml" --reserved-words-mappings Character=chdf -g swift5 --global-property models,apis,modelDocs=false,apiDocs=false,supportingFiles --additional-properties swiftPackagePath=/,projectName=Network -o "../OTUS_HW2/Network/Sources/Network"
