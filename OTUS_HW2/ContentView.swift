@@ -7,13 +7,47 @@
 
 import SwiftUI
 
+enum GenerationCategory: String, CaseIterable, Identifiable {
+    case first = "I"
+    case second = "II"
+    case third = "III"
+    
+    var id: Self {
+        self
+    }
+    
+    var title: String {
+        switch self {
+        case .first:
+            return "Первое"
+        case .second:
+            return "Второе"
+        case .third:
+            return "Третье"
+        }
+    }
+}
+
 struct ContentView: View {
+    @State private var selectedItem: GenerationCategory = .first
+    
     var body: some View {
         VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
+            Image("picachu")
+            Text("Pokemons browser")
+                .font(.title)
+                .multilineTextAlignment(.center)
+            Picker("", selection: $selectedItem) {
+                ForEach(GenerationCategory.allCases) { category in
+                    Text(category.title)
+                        .tag(category)
+                }
+            }
+            .pickerStyle(.segmented)
+            Text("Поиск в \(selectedItem.rawValue) поколении")
+                .font(.title3)
+                .multilineTextAlignment(.leading)
+            Spacer()
         }
         .padding()
     }
